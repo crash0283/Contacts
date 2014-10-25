@@ -1,15 +1,19 @@
 package com.example.flipflopstudios.contacts;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 
 public class ContactList extends Activity {
 
     NewColor newColor = new NewColor();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +24,18 @@ public class ContactList extends Activity {
         RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.listLayout);
 
         relativeLayout.setBackgroundColor(bgColor);
+
+        Intent intent = getIntent();
+        String message = intent.getStringExtra(AddContacts.EXTRA_MESSAGE);
+
+
+        TextView textView = new TextView(this);
+        textView.setTextSize(18);
+        textView.setText(message);
+
+        setContentView(textView);
+
+
 
     }
 

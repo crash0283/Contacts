@@ -3,19 +3,19 @@ package com.example.flipflopstudios.contacts;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 
 public class AddContacts extends Activity {
 
     NewColor newColor = new NewColor();
+
+    public final static String EXTRA_MESSAGE = "com.example.flipflopstudios.MESSAGE";
 
 
 
@@ -33,18 +33,25 @@ public class AddContacts extends Activity {
 
         layout1.setBackgroundColor(color);
 
-        EditText name = (EditText) findViewById(R.id.contactName);
-        final Editable getName = name.getText();
-
-
         Button newButton = (Button)findViewById(R.id.button);
         newButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 startActivity(intent);
-                Toast.makeText(AddContacts.this, getName,Toast.LENGTH_LONG).show();
 
+                Intent intent = new Intent(AddContacts.this, ContactList.class);
+
+                EditText editText = (EditText) findViewById(R.id.contactName);
+                String message = editText.getText().toString();
+
+                EditText email = (EditText) findViewById(R.id.contactEmail);
+                String emailMessage = email.getText().toString();
+
+                String combinedText = "My name is " + message + " and my email is " + emailMessage;
+
+                intent.putExtra(EXTRA_MESSAGE, combinedText);
+                startActivity(intent);
 
 
             }
